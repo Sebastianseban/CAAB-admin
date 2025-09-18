@@ -11,6 +11,10 @@ import { queryClient } from "./lib/reactQuery.js";
 import Dashboard from "./pages/DashboardPage.jsx";
 
 import AddDepartmentPage from "./pages/AddDepartmentPage.jsx";
+import AddActPage from "./pages/AddActPage.jsx";
+
+import AddQuestionnairePage from "./pages/AddQuestionnairePage.jsx";
+import AddBusinessTypePage from "./pages/AddBusinessTypePage.jsx";
 
 
 
@@ -35,6 +39,12 @@ const router = createBrowserRouter([
     children: [
       { path: "dashboard", element: <Dashboard /> },
       { path: "add-department", element: <AddDepartmentPage/> },
+      { path: "add-act", element: <AddActPage/> },
+      { path: "add-business-type", element: <AddBusinessTypePage/>},
+      { path: "add-questionnaire", element: <AddQuestionnairePage/>},
+
+
+
     ],
   },
 ]);

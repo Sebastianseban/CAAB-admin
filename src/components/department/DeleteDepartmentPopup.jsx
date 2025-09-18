@@ -23,7 +23,7 @@ const DeleteDepartmentPopup = () => {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-blue-900/40">
+    <div className="fixed inset-0 backdrop-blur-sm z-50 flex items-center justify-center bg-blue-900/40">
       <div className="w-[420px] bg-white rounded-2xl shadow-xl p-0">
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-5 rounded-t-2xl bg-blue-600">

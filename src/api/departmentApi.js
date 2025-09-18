@@ -1,7 +1,7 @@
 import axiosInstance from "./axiosInstance";
 
 export const addDepartmentApi = async (departmentData) => {
-  const res = await axiosInstance.post("admin/newDepartment", {
+  const res = await axiosInstance.post("/admin/newDepartment", {
     department_name: departmentData.departmentName,
     department_type: departmentData.departmentType,
     appropriate_govt: departmentData.governmentType,
@@ -11,19 +11,23 @@ export const addDepartmentApi = async (departmentData) => {
 };
 
 export const getListDepartmentsApi = async () => {
-  const res = await axiosInstance.get("admin/listDepartment");
+  const res = await axiosInstance.get("/admin/listDepartment");
   return res.data;
 };
 
-
 // Update department
 export const updateDepartmentApi = async ({ id, updatedData }) => {
-  const res = await axiosInstance.put(`/admin/updateDepartment/${id}`, {
-    department_name: updatedData.departmentName,
-    department_type: updatedData.departmentType,
-    appropriate_govt: updatedData.governmentType,
-  });
-  return res.data;
+  try {
+    const res = await axiosInstance.put(`/admin/updateDepartment/${id}`, {
+      department_name: updatedData.departmentName,
+      department_type: updatedData.departmentType,
+      appropriate_govt: updatedData.governmentType,
+    });
+
+    return res.data; // returns { message, department } (adjust as per backend response)
+  } catch (error) {
+    throw error.response?.data || error;
+  }
 };
 
 // Delete department

@@ -12,7 +12,7 @@ import caabLogo from '/public/CAAB-logo-new-2.png'; // Or use "./assets/CAAB-log
 
 const Navbar = () => {
   return (
-    <nav className="w-full bg-blue-700 shadow-md h-16 px-4 flex items-center justify-between">
+    <nav className="w-full bg-[#8043c9d5] shadow-md h-16 px-4 flex items-center justify-between">
       <div className="flex items-center">
         {/* Logo */}
         <img
