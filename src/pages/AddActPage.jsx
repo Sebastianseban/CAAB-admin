@@ -1,8 +1,11 @@
+
 "use client";
 import React, { useState } from "react";
 import AddActForm from "../components/addAct/addActForm";
-import { useAddLaw, useDepartments } from "../hooks/useAct";
+import { useAddLaw } from "../hooks/useAct";
+import { useListDepartments } from "../hooks/useDepartment";
 import AddActTable from "../components/addAct/addActTable";
+import toast from "react-hot-toast";
 
 function AddActPage() {
   const [formData, setFormData] = useState({
@@ -15,10 +18,9 @@ function AddActPage() {
     alertDate: "",
   });
 
-  const [tableRenderToggle, setTableRenderToggle] = useState(false);
-
-  // Fetch departments
-  const { data: departments, isLoading: depLoading } = useDepartments();
+  // Fetch departments with proper error handling
+  const { data: departmentData, isLoading: depLoading } = useListDepartments();
+  const departments = Array.isArray(departmentData?.departments) ? departmentData.departments : [];
 
   // Add law mutation
   const { mutate: addLaw, isPending } = useAddLaw();
@@ -31,17 +33,16 @@ function AddActPage() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const { departmentName, law, actRule, section, penaltyAmount, dueDate, alertDate } =
-      formData;
+    const { departmentName, law, actRule, section, penaltyAmount, dueDate, alertDate } = formData;
 
     if (!departmentName || !law || !actRule || !section || !penaltyAmount || !dueDate || !alertDate) {
-      alert("Enter all required fields");
+      toast.error("Enter all required fields");
       return;
     }
 
     addLaw(formData, {
       onSuccess: (res) => {
-        alert(res.message || "Law added successfully");
+        toast.success(res.message || "Law added successfully");
         setFormData({
           departmentName: "",
           law: "",
@@ -51,13 +52,17 @@ function AddActPage() {
           dueDate: "",
           alertDate: "",
         });
-        setTableRenderToggle((prev) => !prev);
+        // No need for tableRenderToggle - React Query will handle cache invalidation
       },
       onError: () => {
-        alert("Failed to add law");
+        toast.error("Failed to add law");
       },
     });
   };
+
+  if (depLoading) {
+    return <div>Loading departments...</div>;
+  }
 
   return (
     <div className="w-full flex flex-col gap-10 p-6">
@@ -66,11 +71,11 @@ function AddActPage() {
         onChange={handleOnChange}
         onSubmit={handleSubmit}
         isBtnDisabled={isPending}
-        departments={departments || []}
+        departments={departments}
       />
 
       <div>
-        <AddActTable tableRenderToggle={tableRenderToggle} />
+        <AddActTable />
       </div>
     </div>
   );

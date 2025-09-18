@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 import { useListDepartments } from "../../hooks/useDepartment.js";
 import { useAddBusinessType } from "../../hooks/useBusinessType.js";
+import toast from "react-hot-toast";
 
 const AddBusinessType = () =>  {
   const [businessTypeName, setBusinessTypeName] = useState("");
@@ -40,7 +41,7 @@ const AddBusinessType = () =>  {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!businessTypeName || selectedDepartments.length === 0) {
-      alert(
+      toast.error(
         "Please enter business type name and select at least one department"
       );
       return;

@@ -1,7 +1,11 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
-import { createBrowserRouter, RouterProvider, Navigate } from "react-router-dom";
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Navigate,
+} from "react-router-dom";
 
 import AuthLayout from "./layouts/AuthLayout.jsx";
 import MainLayout from "./layouts/MainLayout.jsx";
@@ -15,8 +19,7 @@ import AddActPage from "./pages/AddActPage.jsx";
 
 import AddQuestionnairePage from "./pages/AddQuestionnairePage.jsx";
 import AddBusinessTypePage from "./pages/AddBusinessTypePage.jsx";
-
-
+import { Toaster } from "react-hot-toast";
 
 const router = createBrowserRouter([
   {
@@ -38,13 +41,10 @@ const router = createBrowserRouter([
     element: <MainLayout />,
     children: [
       { path: "dashboard", element: <Dashboard /> },
-      { path: "add-department", element: <AddDepartmentPage/> },
-      { path: "add-act", element: <AddActPage/> },
-      { path: "add-business-type", element: <AddBusinessTypePage/>},
-      { path: "add-questionnaire", element: <AddQuestionnairePage/>},
-
-
-
+      { path: "add-department", element: <AddDepartmentPage /> },
+      { path: "add-act", element: <AddActPage /> },
+      { path: "add-business-type", element: <AddBusinessTypePage /> },
+      { path: "add-questionnaire", element: <AddQuestionnairePage /> },
     ],
   },
 ]);
@@ -52,7 +52,8 @@ const router = createBrowserRouter([
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
-    <RouterProvider router={router} />
+      <Toaster position="top-right" reverseOrder={false} />
+      <RouterProvider router={router} />
     </QueryClientProvider>
   </StrictMode>
 );

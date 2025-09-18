@@ -24,5 +24,5 @@ export const addLawApi = async (lawData) => {
 // Get list of all laws/acts
 export const getActsApi = async () => {
   const { data } = await axiosInstance.get("/admin/listLaws"); 
-  return data.law; 
+  return data; 
 };

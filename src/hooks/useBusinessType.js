@@ -6,6 +6,7 @@ import {
   fetchBusinessTypes,
   updateBusinessType,
 } from "../api/businessTypeApi.js";
+import toast from "react-hot-toast";
 
 export const useAddBusinessType = () => {
   const queryClient = useQueryClient();
@@ -13,7 +14,7 @@ export const useAddBusinessType = () => {
   return useMutation({
     mutationFn: addBusinessType,
     onSuccess: (data) => {
-      alert(data.message);
+     toast.success("Business type added successfully");
       queryClient.invalidateQueries({ queryKey: ["businessTypes"] });
     },
   });

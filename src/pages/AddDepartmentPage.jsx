@@ -5,6 +5,7 @@ import { useAddDepartment } from "../hooks/useDepartment";
 import EditDepartmentPopup from "../components/department/EditDepartmentPopup";
 import DeleteDepartmentPopup from "../components/department/DeleteDepartmentPopup";
 import DepartmentForm from "../components/department/DepartmentForm";
+import toast from "react-hot-toast";
 
 const AddDepartmentPage = () => {
   const [departmentData, setDepartmentData] = useState({
@@ -21,30 +22,31 @@ const AddDepartmentPage = () => {
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault(); 
+    e.preventDefault();
     const { departmentName, departmentType, governmentType } = departmentData;
     if (!departmentName || !departmentType || !governmentType) {
-      alert("Please fill all fields");
+      toast.error("Please fill all fields");
       return;
     }
 
     addDepartment(departmentData, {
-      onSuccess: () =>
+      onSuccess: () => {
+        toast.success("Department added successfully!");
         setDepartmentData({
           departmentName: "",
           departmentType: "",
           governmentType: "",
-        }),
+        });
+      },
       onError: (err) => {
         console.error("Add Department failed:", err);
-        alert("Failed to add department");
+        toast.error("Failed to add department");
       },
     });
   };
 
   return (
     <div className="w-full flex flex-col gap-10 p-6 md:p-12 bg-[#F7F8FA] min-h-screen">
-    
       <DepartmentForm
         formData={departmentData}
         onChange={handleOnChange}
@@ -53,12 +55,10 @@ const AddDepartmentPage = () => {
         buttonLabel="Add Department"
       />
 
-
       <div className="border bg-white rounded-2xl shadow p-6 text-sm text-gray-700 text-center">
         <DepartmentTable />
       </div>
 
-   
       <EditDepartmentPopup />
       <DeleteDepartmentPopup />
     </div>

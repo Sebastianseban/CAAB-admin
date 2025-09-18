@@ -1,8 +1,10 @@
+
 import React from "react";
 import { useActs } from "../../hooks/useAct";
 
-const AddActTable = ({ tableRenderToggle }) => {
-  const { data: acts, isLoading, isError } = useActs(tableRenderToggle);
+const AddActTable = () => {
+  // Remove tableRenderToggle - React Query handles cache automatically
+  const { data, isLoading, isError } = useActs();
 
   if (isLoading) {
     return (
@@ -20,7 +22,10 @@ const AddActTable = ({ tableRenderToggle }) => {
     );
   }
 
-  if (!acts || acts.length === 0) {
+  // Extract acts array from API response structure
+  const acts = Array.isArray(data?.law) ? data.law : [];
+
+  if (acts.length === 0) {
     return (
       <div className="w-full text-center py-6 text-gray-500">
         No acts found
@@ -33,23 +38,23 @@ const AddActTable = ({ tableRenderToggle }) => {
       <table className="min-w-full border border-gray-200 text-sm">
         <thead className="bg-gray-100">
           <tr>
-            <th className="px-4 py-2 border">Department</th>
-            <th className="px-4 py-2 border">Law</th>
-            <th className="px-4 py-2 border">Act / Rule</th>
-            <th className="px-4 py-2 border">Section</th>
-            <th className="px-4 py-2 border">Penalty</th>
-            <th className="px-4 py-2 border">Due Date</th>
-            <th className="px-4 py-2 border">Alert Date</th>
+            <th className="px-4 py-2 border text-left">Department</th>
+            <th className="px-4 py-2 border text-left">Law</th>
+            <th className="px-4 py-2 border text-left">Act / Rule</th>
+            <th className="px-4 py-2 border text-left">Section</th>
+            <th className="px-4 py-2 border text-left">Penalty</th>
+            <th className="px-4 py-2 border text-left">Due Date</th>
+            <th className="px-4 py-2 border text-left">Alert Date</th>
           </tr>
         </thead>
         <tbody>
           {acts.map((act) => (
-            <tr key={act._id} className="hover:bg-gray-50">
+            <tr key={act.id} className="hover:bg-gray-50">
               <td className="px-4 py-2 border">{act.department_name}</td>
               <td className="px-4 py-2 border">{act.law}</td>
               <td className="px-4 py-2 border">{act.act_rule}</td>
               <td className="px-4 py-2 border">{act.section}</td>
-              <td className="px-4 py-2 border">{act.penalty_amount}</td>
+              <td className="px-4 py-2 border">₹{act.penalty_amount}</td>
               <td className="px-4 py-2 border">
                 {new Date(act.due_date).toLocaleDateString()}
               </td>

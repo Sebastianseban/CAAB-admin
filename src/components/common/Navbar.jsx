@@ -1,13 +1,4 @@
-// import React from 'react'
 
-// const Navbar = () => {
-//   return (
-//     <div className='bg-blue-600 h-full'>Navbar</div>
-//   )
-// }
-
-// export default Navbarimport React from 'react';
-// Place your CAAB logo SVG or PNG in the "public" folder or as an import.
 import caabLogo from '/public/CAAB-logo-new-2.png'; // Or use "./assets/CAAB-logo-new-2.png" as per your setup
 
 const Navbar = () => {

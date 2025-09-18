@@ -1,3 +1,4 @@
+
 import React from "react";
 
 const AddActForm = ({
@@ -5,7 +6,7 @@ const AddActForm = ({
   onChange,
   onSubmit,
   isBtnDisabled,
-  departments,
+  departments = [],
 }) => {
   return (
     <div className="pb-10 flex flex-col gap-3 xl:gap-6 border-b border-[#C2C6D4]">
@@ -21,9 +22,9 @@ const AddActForm = ({
           onChange={onChange}
         >
           <option value="">Select Department</option>
-          {departments?.map((dept) => (
-            <option key={dept._id || dept} value={dept.department_name || dept}>
-              {dept.department_name || dept}
+          {departments.map((dept) => (
+            <option key={dept.id} value={dept.department_name}>
+              {dept.department_name}
             </option>
           ))}
         </select>
@@ -123,7 +124,7 @@ const AddActForm = ({
         onClick={onSubmit}
         disabled={isBtnDisabled}
       >
-        ADD ACT
+        {isBtnDisabled ? "Adding..." : "ADD ACT"}
       </button>
     </div>
   );
