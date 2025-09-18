@@ -7,7 +7,7 @@ import DeleteBusinessTypePopup from "../components/businessType/DeleteBusinessTy
 
 import { useListDepartments } from "../hooks/useDepartment";
 
-function AddBusinessTypePage() {
+const  AddBusinessTypePage = () => {
    const { data } = useListDepartments();
 
  const departments = Array.isArray(data?.departments) ? data.departments : [];

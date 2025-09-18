@@ -1,24 +1,13 @@
+
 import React from "react";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { deleteBusinessType } from "../../api/businessTypeApi.js.js";
-import useBusinessTypeStore from "../../store/businessTypeStore.js";
+import useBusinessTypeStore from "../../store/businessTypeStore";
+import { useDeleteBusinessType } from "../../hooks/useBusinessType";
 
-function DeleteBusinessTypePopup() {
-  const queryClient = useQueryClient();
-  const {
-    selectedBusinessTypeId,
-    isDeletePopupOpen,
-    closeDeletePopup,
-  } = useBusinessTypeStore();
+const DeleteBusinessTypePopup = () => {
+  const { selectedBusinessTypeId, isDeletePopupOpen, closeDeletePopup } =
+    useBusinessTypeStore();
 
-  const { mutate, isPending } = useMutation({
-    mutationFn: () => deleteBusinessType(selectedBusinessTypeId),
-    onSuccess: (res) => {
-      alert(res.message);
-      queryClient.invalidateQueries({ queryKey: ["businessTypes"] });
-      closeDeletePopup();
-    },
-  });
+  const { mutate, isPending } = useDeleteBusinessType();
 
   if (!isDeletePopupOpen) return null;
 
@@ -38,7 +27,11 @@ function DeleteBusinessTypePopup() {
             <button
               className="w-full py-2 border border-red-600 text-red-600 rounded"
               disabled={isPending}
-              onClick={() => mutate()}
+              onClick={() =>
+                mutate(selectedBusinessTypeId, {
+                  onSuccess: () => closeDeletePopup(),
+                })
+              }
             >
               {isPending ? "Deleting..." : "Delete"}
             </button>

@@ -1,69 +1,56 @@
-// src/hooks/useBusinessType.js
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient, useQuery } from "@tanstack/react-query";
 import {
-  fetchDepartmentsApi,
-  fetchBusinessTypesApi,
-  fetchBusinessTypeByIdApi,
-  addBusinessTypeApi,
-  updateBusinessTypeApi,
-  deleteBusinessTypeApi,
+  addBusinessType,
+  deleteBusinessType,
+  fetchBusinessTypeById,
+  fetchBusinessTypes,
+  updateBusinessType,
 } from "../api/businessTypeApi.js";
 
-// Get all departments
-export const useDepartments = () => {
-  return useQuery({
-    queryKey: ["departments"],
-    queryFn: fetchDepartmentsApi,
-  });
-};
-
-// Get all business types
-export const useBusinessTypes = () => {
-  return useQuery({
-    queryKey: ["businessTypes"],
-    queryFn: fetchBusinessTypesApi,
-  });
-};
-
-// Get business type by ID
-export const useBusinessTypeById = (id) => {
-  return useQuery({
-    queryKey: ["businessType", id],
-    queryFn: () => fetchBusinessTypeByIdApi(id),
-    enabled: !!id,
-  });
-};
-
-// Add business type
 export const useAddBusinessType = () => {
   const queryClient = useQueryClient();
+
   return useMutation({
-    mutationFn: addBusinessTypeApi,
-    onSuccess: () => {
-      queryClient.invalidateQueries(["businessTypes"]);
+    mutationFn: addBusinessType,
+    onSuccess: (data) => {
+      alert(data.message);
+      queryClient.invalidateQueries({ queryKey: ["businessTypes"] });
     },
   });
 };
 
-// Update business type
-export const useUpdateBusinessType = () => {
+export const useBusinessTypes = () =>
+  useQuery({
+    queryKey: ["businessTypes"],
+    queryFn: fetchBusinessTypes,
+  });
+
+export const useBusinessTypeById = (id, enabled = true) =>
+  useQuery({
+    queryKey: ["businessType", id],
+    queryFn: () => fetchBusinessTypeById(id),
+    enabled: !!id && enabled,
+  });
+
+export const useUpdateBusinessType = (id) => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: updateBusinessTypeApi,
-    onSuccess: (_, variables) => {
-      queryClient.invalidateQueries(["businessTypes"]);
-      queryClient.invalidateQueries(["businessType", variables.id]);
+    mutationFn: (data) => updateBusinessType({ id, data }),
+    onSuccess: (res) => {
+      alert(res.message);
+      queryClient.invalidateQueries({ queryKey: ["businessTypes"] });
+      queryClient.invalidateQueries({ queryKey: ["businessType", id] });
     },
   });
 };
 
-// Delete business type
 export const useDeleteBusinessType = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: deleteBusinessTypeApi,
-    onSuccess: () => {
-      queryClient.invalidateQueries(["businessTypes"]);
+    mutationFn: (id) => deleteBusinessType(id),
+    onSuccess: (res) => {
+      alert(res.message);
+      queryClient.invalidateQueries({ queryKey: ["businessTypes"] });
     },
   });
 };

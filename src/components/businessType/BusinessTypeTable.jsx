@@ -1,63 +1,21 @@
 import React from "react";
-import { useQuery } from "@tanstack/react-query";
-import { fetchBusinessTypes } from "../../api/businessTypeApi.js.js";
+
 import useBusinessTypeStore from "../../store/businessTypeStore.js";
+import { useBusinessTypes } from "../../hooks/useBusinessType.js";
 
-function BusinessTypeTable() {
+const  BusinessTypeTable = () => {
   const { openEditPopup, openDeletePopup } = useBusinessTypeStore();
+const { data: businessTypes = [], isLoading, error } = useBusinessTypes();
 
-  const { data: businessTypes = [] } = useQuery({
-    queryKey: ["businessTypes"],
-    queryFn: fetchBusinessTypes,
-  });
+  if (isLoading) {
+    return <div>Loading business types...</div>;
+  }
 
-  // return (
-  //   <table className="w-full border">
-  //     <thead className="bg-gray-700 text-white">
-  //       <tr>
-  //         <th className="px-4 py-2">ID</th>
-  //         <th className="px-4 py-2">Business Type</th>
-  //         <th className="px-4 py-2">Departments</th>
-  //         <th className="px-4 py-2">Actions</th>
-  //       </tr>
-  //     </thead>
-  //     <tbody>
-  //       {businessTypes.length > 0 ? (
-  //         businessTypes.map((bt, idx) => (
-  //           <tr key={bt.id} className="border-b">
-  //             <td className="px-4 py-2">{idx + 1}</td>
-  //             <td className="px-4 py-2">{bt.business_type}</td>
-  //             <td className="px-4 py-2">
-  //               {bt.department_name.map((d, i) => (
-  //                 <div key={i}>{d}</div>
-  //               ))}
-  //             </td>
-  //             <td className="px-4 py-2 flex gap-4">
-  //               <button
-  //                 className="text-blue-600"
-  //                 onClick={() => openEditPopup(bt.id)}
-  //               >
-  //                 Edit
-  //               </button>
-  //               <button
-  //                 className="text-red-600"
-  //                 onClick={() => openDeletePopup(bt.id)}
-  //               >
-  //                 Delete
-  //               </button>
-  //             </td>
-  //           </tr>
-  //         ))
-  //       ) : (
-  //         <tr>
-  //           <td colSpan={4} className="text-center py-4">
-  //             No Business Types Found
-  //           </td>
-  //         </tr>
-  //       )}
-  //     </tbody>
-  //   </table>
-  // );
+  if (error) {
+    return <div className="text-red-500">Error loading business types: {error.message}</div>;
+  }
+
+
   return (
  <div className="overflow-x-auto rounded-xl shadow-lg mt-6">
   <table className="min-w-full table-auto rounded-xl">
