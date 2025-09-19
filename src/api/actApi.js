@@ -1,10 +1,6 @@
 import axiosInstance from "../api/axiosInstance"; // ✅ re-use axiosInstance with baseURL & interceptors
 
-// Get departments
-export const getDepartmentsApi = async () => {
-  const { data } = await axiosInstance.get("/admin/departments");
-  return data; // make sure backend returns an array
-};
+
 
 // Add a new law/act
 export const addLawApi = async (lawData) => {

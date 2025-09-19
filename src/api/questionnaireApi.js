@@ -13,8 +13,15 @@ export const listSectionsApi = async () => {
   return res.data;
 };
 
+
 // List All Questionnaires
 export const listQuestionnairesApi = async () => {
   const res = await axiosInstance.get("/admin/listQuestions");
   return res.data;
 };
+
+
+export const deleteQuestionApi  = async (id) => {
+  const res = await axiosInstance.delete(`/admin/removeQuestions/${id}`)
+  return res.data
+}

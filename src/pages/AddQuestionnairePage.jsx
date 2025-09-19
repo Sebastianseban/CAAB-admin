@@ -1,7 +1,8 @@
+
 "use client";
 import { useState } from "react";
 import { useAddQuestions, useSections } from "../hooks/useQuestionnaire";
-// import QuestionnaireTable from "@/app/components/add-qusationnaire/QuestionnaireTable";
+import QuestionnaireTable from "../components/QuestionnaireTable/QuestionnaireTable";
 
 
 function AddQuestionnairePage() {
@@ -12,7 +13,6 @@ function AddQuestionnairePage() {
 
   const { mutate: addQuestions } = useAddQuestions();
   const { data: sections = [] } = useSections();
-  const [renderTable, setRenderTable] = useState(false);
 
   // Handle Section change
   const handleSectionChange = (e) => {
@@ -62,7 +62,7 @@ function AddQuestionnairePage() {
           section: "",
           questionsList: [{ questions: "", gravity: "" }],
         });
-        setRenderTable((prev) => !prev);
+        // ⚡ No need to toggle renderTable, React Query handles refetch
       },
       onError: () => {
         alert("Failed to add questions.");
@@ -140,11 +140,8 @@ function AddQuestionnairePage() {
         </button>
       </div>
 
-      {/* Table */}
-      {/* <QuestionnaireTable
-        renderQuestionnaireTable={renderTable}
-        setRenderQuestionnaireTable={setRenderTable}
-      /> */}
+      <QuestionnaireTable/>
+
     </div>
   );
 }

@@ -1,13 +1,8 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { getDepartmentsApi, addLawApi, getActsApi } from "../api/actApi";
+import {  addLawApi, getActsApi,  } from "../api/actApi";
 
 // Fetch departments
-export const useDepartments = () => {
-  return useQuery({
-    queryKey: ["departments"],
-    queryFn: getDepartmentsApi,
-  });
-};
+
 
 // Add new law
 export const useAddLaw = () => {
