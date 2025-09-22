@@ -4,7 +4,6 @@ import { useState } from "react";
 import { useAddQuestions, useSections } from "../hooks/useQuestionnaire";
 import QuestionnaireTable from "../components/QuestionnaireTable/QuestionnaireTable";
 
-
 function AddQuestionnairePage() {
   const [employeeCategory, setEmployeeCategory] = useState({
     section: "",
@@ -62,7 +61,6 @@ function AddQuestionnairePage() {
           section: "",
           questionsList: [{ questions: "", gravity: "" }],
         });
-        // ⚡ No need to toggle renderTable, React Query handles refetch
       },
       onError: () => {
         alert("Failed to add questions.");
@@ -71,11 +69,12 @@ function AddQuestionnairePage() {
   };
 
   return (
-    <div className="w-full flex flex-col gap-10">
-      <div className="pb-10 flex flex-col gap-3 xl:gap-6 border-b border-[#C2C6D4]">
+    <div className="w-full flex flex-col gap-10 py-12 bg-gradient-to-b from-[#f7f7fa] to-[#e6e9f8] min-h-screen">
+      {/* Form container */}
+      <div className="ms-4 max-w-lg w-full bg-white rounded-3xl shadow-xl p-8 border border-gray-100 flex flex-col gap-7">
         {/* Section Selector */}
         <select
-          className="w-[300px] h-10 px-4 text-sm border rounded-lg"
+          className="w-full h-12 px-4 text-sm border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#782A99] focus:border-[#782A99] transition bg-white font-semibold"
           name="section"
           value={employeeCategory.section}
           onChange={handleSectionChange}
@@ -88,21 +87,23 @@ function AddQuestionnairePage() {
           ))}
         </select>
 
-        {/* Questions */}
+        {/* Question Blocks */}
         {employeeCategory.questionsList.map((q, index) => (
-          <div key={index} className="flex flex-col gap-2 border-b pb-4">
+          <div
+            key={index}
+            className="flex flex-col gap-4 border-b border-gray-200 pb-6 last:border-none"
+          >
             <textarea
-              className="w-[300px] px-4 py-2 border rounded-lg"
+              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#782A99] focus:border-[#782A99] transition resize-none font-medium bg-[#F7F8FA]"
               placeholder="Type your question"
               value={q.questions}
               onChange={(e) =>
                 handleQuestionListChange(index, "questions", e.target.value)
               }
               rows="3"
-            ></textarea>
-
+            />
             <select
-              className="w-[300px] h-10 px-4 border rounded-lg"
+              className="w-full h-12 px-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#782A99] focus:border-[#782A99] transition bg-white font-medium"
               value={q.gravity}
               onChange={(e) =>
                 handleQuestionListChange(index, "gravity", e.target.value)
@@ -113,9 +114,9 @@ function AddQuestionnairePage() {
               <option value="medium">Medium</option>
               <option value="high">High</option>
             </select>
-
             <button
-              className="w-32 h-8 text-xs bg-red-500 text-white rounded-lg"
+              type="button"
+              className="w-32 h-9 self-start text-xs bg-red-600 hover:bg-red-700 transition rounded-xl text-white font-semibold shadow"
               onClick={() => removeQuestion(index)}
             >
               Remove
@@ -125,7 +126,8 @@ function AddQuestionnairePage() {
 
         {/* Add Question Button */}
         <button
-          className="w-44 h-10 bg-green-600 text-white rounded-lg"
+          type="button"
+          className="w-44 h-12 bg-green-600 hover:bg-green-700 transition rounded-xl text-white font-bold shadow-lg"
           onClick={addQuestion}
         >
           Add Question
@@ -133,15 +135,16 @@ function AddQuestionnairePage() {
 
         {/* Submit Button */}
         <button
-          className="w-44 h-10 bg-[#782A99] text-white rounded-lg"
+          type="button"
+          className="w-44 h-12 bg-gradient-to-r from-[#782A99] to-[#631A78] hover:from-[#631A78] hover:to-[#4e1359] transition rounded-xl text-white font-bold shadow-lg"
           onClick={handleSubmit}
         >
           Submit
         </button>
       </div>
 
-      <QuestionnaireTable/>
-
+      {/* Table Section */}
+      <QuestionnaireTable />
     </div>
   );
 }

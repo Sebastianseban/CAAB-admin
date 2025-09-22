@@ -11,7 +11,7 @@ export default function MainLayout() {
       <Navbar/>
      </div>
     <div className="flex ">
-      <div className="w-[240px]">
+      <div className="w-80">
         <Sidebar/>
       </div>
       <div className="w-full">

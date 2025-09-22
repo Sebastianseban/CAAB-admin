@@ -1,77 +1,79 @@
-import React from "react";
 
+
+
+import React from "react";
 import useBusinessTypeStore from "../../store/businessTypeStore.js";
 import { useBusinessTypes } from "../../hooks/useBusinessType.js";
 
-const  BusinessTypeTable = () => {
+const BusinessTypeTable = () => {
   const { openEditPopup, openDeletePopup } = useBusinessTypeStore();
-const { data: businessTypes = [], isLoading, error } = useBusinessTypes();
+  const { data: businessTypes = [], isLoading, error } = useBusinessTypes();
 
   if (isLoading) {
-    return <div>Loading business types...</div>;
+    return <div className="text-gray-600 py-6 text-center">Loading business types...</div>;
   }
 
   if (error) {
-    return <div className="text-red-500">Error loading business types: {error.message}</div>;
+    return <div className="text-red-500 py-6 text-center">Error loading business types: {error.message}</div>;
   }
 
-
   return (
- <div className="overflow-x-auto rounded-xl shadow-lg mt-6">
-  <table className="min-w-full table-auto rounded-xl">
-    <thead>
-      <tr className="bg-[#9463d1] text-white">
-        <th className="px-6 py-4 text-left font-semibold tracking-wide">ID</th>
-        <th className="px-6 py-4 text-left font-semibold tracking-wide">Business Type</th>
-        <th className="px-6 py-4 text-left font-semibold tracking-wide">Departments</th>
-        <th className="px-6 py-4 text-left font-semibold tracking-wide">Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      {businessTypes.length > 0 ? (
-        businessTypes.map((bt, idx) => (
-          <tr key={bt.id} className={idx % 2 === 0 ? "bg-white" : "bg-[#f4edfa]"}>
-            <td className="px-6 py-3">{idx + 1}</td>
-            <td className="px-6 py-3">{bt.business_type}</td>
-            <td className="px-6 py-3">
-              {bt.department_name.map((d, i) => (
-                <div
-                  key={i}
-                  className="inline-block px-2 py-1 bg-[#f26a91] text-white rounded mr-1 text-xs"
-                >
-                  {d}
-                </div>
-              ))}
-            </td>
-            <td className="px-6 py-3 flex gap-2">
-              <button
-                className="px-3 py-1 bg-[#5c73e6] text-white rounded hover:bg-[#4053af] transition"
-                onClick={() => openEditPopup(bt.id)}
-              >
-                Edit
-              </button>
-              <button
-                className="px-3 py-1 bg-[#f26a91] text-white rounded hover:bg-[#c94c71] transition"
-                onClick={() => openDeletePopup(bt.id)}
-              >
-                Delete
-              </button>
-            </td>
+    <div className="overflow-x-auto rounded-3xl shadow-2xl bg-white mt-6 border border-gray-200">
+      <table className="min-w-full table-auto rounded-3xl overflow-hidden">
+        <thead>
+          <tr className="bg-gradient-to-r from-[#3752fa] via-[#6040ba] to-[#4d78d0] text-white select-none">
+            <th className="px-6 py-4 text-left font-semibold tracking-wide uppercase text-sm border-r border-blue-500">ID</th>
+            <th className="px-6 py-4 text-left font-semibold tracking-wide uppercase text-sm border-r border-blue-500">Business Type</th>
+            <th className="px-6 py-4 text-left font-semibold tracking-wide uppercase text-sm border-r border-blue-500">Departments</th>
+            <th className="px-6 py-4 text-left font-semibold tracking-wide uppercase text-sm">Actions</th>
           </tr>
-        ))
-      ) : (
-        <tr>
-          <td colSpan={4} className="text-center py-8 text-slate-600">
-            No Business Types Found
-          </td>
-        </tr>
-      )}
-    </tbody>
-  </table>
-</div>
-
-);
-
-}
+        </thead>
+        <tbody>
+          {businessTypes.length > 0 ? (
+            businessTypes.map((bt, idx) => (
+              <tr
+                key={bt.id}
+                className={idx % 2 === 0 ? "bg-white" : "bg-[#f3eaff]"}
+              >
+                <td className="px-6 py-3 border-r border-gray-100">{idx + 1}</td>
+                <td className="px-6 py-3 border-r border-gray-100">{bt.business_type}</td>
+                <td className="px-6 py-3 border-r border-gray-100">
+                  {bt.department_name.map((d, i) => (
+                    <span
+                      key={i}
+                      className="inline-block px-3 py-1 bg-[#f26a91] text-white rounded-full mr-2 text-xs font-semibold"
+                    >
+                      {d}
+                    </span>
+                  ))}
+                </td>
+                <td className="px-6 py-3 flex gap-3">
+                  <button
+                    className="px-4 py-1 bg-[#5c73e6] text-white rounded-lg hover:bg-[#4053af] transition-shadow shadow-md"
+                    onClick={() => openEditPopup(bt.id)}
+                  >
+                    Edit
+                  </button>
+                  <button
+                    className="px-4 py-1 bg-[#f26a91] text-white rounded-lg hover:bg-[#c94c71] transition-shadow shadow-md"
+                    onClick={() => openDeletePopup(bt.id)}
+                  >
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            ))
+          ) : (
+            <tr>
+              <td colSpan={4} className="text-center py-12 text-gray-500 font-semibold">
+                No Business Types Found
+              </td>
+            </tr>
+          )}
+        </tbody>
+      </table>
+    </div>
+  );
+};
 
 export default BusinessTypeTable;
