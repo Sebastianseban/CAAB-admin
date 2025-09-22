@@ -17,6 +17,7 @@ function AddActPage() {
     dueDate: "",
     alertDate: "",
   });
+  const [showAddActFrom,setShowAddActForm] = useState(false)
 
   // Fetch departments with proper error handling
   const { data: departmentData, isLoading: depLoading } = useListDepartments();
@@ -66,14 +67,25 @@ function AddActPage() {
 
   return (
     <div className="w-full flex flex-col gap-10 p-6">
-      <AddActForm
+
+          <div className="flex justify-end pr-7">
+        <button
+          type="button"
+          className="w-56 h-12 bg-gradient-to-r from-[#782A99] to-[#631A78] hover:from-[#631A78] hover:to-[#4e1359] transition rounded-xl text-white font-bold shadow-xl"
+          onClick={() => setShowAddActForm(true)}
+        >
+          + Add Acts
+        </button>
+      </div>
+  { showAddActFrom && (  <AddActForm
         formData={formData}
         onChange={handleOnChange}
         onSubmit={handleSubmit}
         isBtnDisabled={isPending}
         departments={departments}
-      />
-
+        onClose={() => setShowAddActForm(false)}
+      />)
+}
       <div>
         <AddActTable />
       </div>
