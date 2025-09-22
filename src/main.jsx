@@ -20,6 +20,7 @@ import AddActPage from "./pages/AddActPage.jsx";
 import AddQuestionnairePage from "./pages/AddQuestionnairePage.jsx";
 import AddBusinessTypePage from "./pages/AddBusinessTypePage.jsx";
 import { Toaster } from "react-hot-toast";
+import ManagecompanyPage from "./pages/ManagecompanyPage.jsx";
 
 const router = createBrowserRouter([
   {
@@ -45,6 +46,7 @@ const router = createBrowserRouter([
       { path: "add-act", element: <AddActPage /> },
       { path: "add-business-type", element: <AddBusinessTypePage /> },
       { path: "add-questionnaire", element: <AddQuestionnairePage /> },
+      { path: "manage-company", element: <ManagecompanyPage /> },
     ],
   },
 ]);
