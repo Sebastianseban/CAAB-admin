@@ -14,7 +14,7 @@ export default function MainLayout() {
       <div className="w-80">
         <Sidebar/>
       </div>
-      <div className="w-full">
+      <div className="w-full min-h-screen">
         <Outlet/>
       </div>
 

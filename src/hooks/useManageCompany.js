@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getCompaniesApi } from "../api/manageCompanyApi";
+import { getBranchesApi, getCompaniesApi, getCompanyByIdApi } from "../api/manageCompanyApi";
 import manageCompanyStore from "../store/manageCompanyStore";
 
 export const useCompanies = () => {
@@ -14,3 +14,21 @@ export const useCompanies = () => {
     keepPreviousData: true, // Keep previous data while loading new page
   });
 };
+
+export const useCompanyById = (id) => {
+  return useQuery({
+    queryKey: ["company", id],
+    queryFn: () => getCompanyByIdApi(id),
+    enabled: !!id, // Only run if id exists
+  });
+};
+
+export const useBranches = (companyId) => {
+  return useQuery({
+    queryKey: ["branches", companyId],
+    queryFn: () => getBranchesApi(companyId),
+    enabled: !!companyId,
+    select: (data) => data.branches || [],
+  });
+};
+
