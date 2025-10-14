@@ -20,11 +20,14 @@ export const useAddBusinessType = () => {
   });
 };
 
-export const useBusinessTypes = () =>
-  useQuery({
-    queryKey: ["businessTypes"],
-    queryFn: fetchBusinessTypes,
+
+export const useBusinessTypes = (page = 1, limit = 10) => {
+  return useQuery({
+    queryKey: ["businessTypes", page],
+    queryFn: () => fetchBusinessTypes(page, limit),
+    keepPreviousData: true, // keeps old data while fetching new page
   });
+};
 
 export const useBusinessTypeById = (id, enabled = true) =>
   useQuery({

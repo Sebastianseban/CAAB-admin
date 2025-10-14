@@ -1,11 +1,12 @@
 import axiosInstance from "./axiosInstance";
 
 
-export const fetchBusinessTypes = async () => {
-  const res = await axiosInstance.get("/admin/listBusinessType",);
-  return res.data.businessType;
+export const fetchBusinessTypes = async (page = 1, limit = 10) => {
+  const res = await axiosInstance.get("/admin/listBusinessType", {
+    params: { page, limit },
+  });
+  return res.data; // contains { businessType, totalPages, totalCount }
 };
-
 export const fetchBusinessTypeById = async (id) => {
   const res = await axiosInstance.get(`/admin/getBusinessTypeById/${id}`);
   return res.data;
