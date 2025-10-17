@@ -21,10 +21,10 @@ export default function QuestionnaireTable() {
   };
 
   return (
-    <div className="overflow-x-auto bg-white rounded-3xl shadow-2xl border border-gray-100 p-4 mt-8">
+    <div className="p-4">
       <table className="min-w-full divide-y divide-gray-200 text-sm rounded-3xl overflow-hidden">
         <thead>
-          <tr className="bg-gradient-to-r from-[#782A99] to-[#6040ba] text-white select-none">
+          <tr className="bg-[#224167] text-white select-none">
             <th className="px-6 py-3 text-left font-bold uppercase tracking-wide rounded-tl-3xl">Section</th>
             <th className="px-6 py-3 text-left font-bold uppercase tracking-wide">Question</th>
             <th className="px-6 py-3 text-left font-bold uppercase tracking-wide">Gravity</th>

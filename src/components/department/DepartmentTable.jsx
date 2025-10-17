@@ -130,7 +130,7 @@ const DepartmentTable = () => {
   return (
     <div className="w-full overflow-x-auto rounded-2xl shadow-lg border border-gray-200 bg-white">
       <table className="min-w-full border-collapse rounded-2xl overflow-hidden">
-        <thead className="bg-gradient-to-r from-[#3752fa] via-[#6040ba] to-[#4d78d0] text-white">
+        <thead className="bg-[#224167] text-white">
           <tr>
             <th className="text-left px-6 py-3 uppercase font-semibold text-sm border-b border-blue-300">#</th>
             <th className="text-left px-6 py-3 uppercase font-semibold text-sm border-b border-blue-300">Department Name</th>

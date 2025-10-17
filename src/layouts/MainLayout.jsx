@@ -7,18 +7,22 @@ export default function MainLayout() {
   return (
    <div>
 
-     <div >
-      <Navbar/>
-     </div>
-    <div className="flex ">
-      <div className="w-80">
-        <Sidebar/>
+     <div className="flex">
+        <div className="w-80">
+    
+          <Sidebar/>
       </div>
-      <div className="w-full min-h-screen">
+
+         <div className="w-full min-h-screen">
+                <Navbar/>
         <Outlet/>
       </div>
 
-    </div>
+     </div>
+    
+    
+   
+
    </div>
   );
 }

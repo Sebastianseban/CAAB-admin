@@ -44,20 +44,17 @@ function MangeCompaniesTable() {
   const companies = data?.companies || [];
 
   return (
-    <div className="max-w-7xl mx-auto p-6 bg-white rounded-3xl shadow-2xl">
-      <h1 className="text-3xl font-extrabold mb-6 text-[#3752fa] drop-shadow-lg select-none">
-        Companies List
-      </h1>
-
+    <div >
+    
       <div className="overflow-x-auto rounded-2xl shadow-lg border border-gray-200">
         <table className="min-w-full text-sm border-collapse rounded-2xl overflow-hidden">
-          <thead className="bg-gradient-to-r from-[#3752fa] via-[#6040ba] to-[#4d78d0] text-white select-none">
+          <thead className="bg-[#224167] text-white select-none">
             <tr>
-              <th className="text-left px-6 py-3 uppercase font-semibold tracking-wide rounded-tl-2xl border-r border-blue-300">ID</th>
-              <th className="text-left px-6 py-3 uppercase font-semibold tracking-wide border-r border-blue-300">Company Name</th>
-              <th className="text-left px-6 py-3 uppercase font-semibold tracking-wide border-r border-blue-300">UserName</th>
-              <th className="text-left px-6 py-3 uppercase font-semibold tracking-wide border-r border-blue-300">Mobile Number</th>
-              <th className="text-left px-6 py-3 uppercase font-semibold tracking-wide border-r border-blue-300">Email</th>
+              <th className="text-left px-6 py-3 uppercase font-semibold tracking-wide rounded-tl-2xl border-r border-blue-900">ID</th>
+              <th className="text-left px-6 py-3 uppercase font-semibold tracking-wide border-r border-blue-900">Company Name</th>
+              <th className="text-left px-6 py-3 uppercase font-semibold tracking-wide border-r border-blue-900">UserName</th>
+              <th className="text-left px-6 py-3 uppercase font-semibold tracking-wide border-r border-blue-900">Mobile Number</th>
+              <th className="text-left px-6 py-3 uppercase font-semibold tracking-wide border-r border-blue-900">Email</th>
               <th className="text-left px-6 py-3 uppercase font-semibold tracking-wide rounded-tr-2xl">Actions</th>
             </tr>
           </thead>

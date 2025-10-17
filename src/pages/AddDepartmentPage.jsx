@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import DepartmentTable from "../components/department/DepartmentTable";
 import { useAddDepartment } from "../hooks/useDepartment";
@@ -46,16 +45,12 @@ const AddDepartmentPage = () => {
   };
 
   return (
-    <main className=" w-full min-h-screen bg-gradient-to-b from-[#f0f2f7] to-[#d6dbf7] p-8 md:p-12">
+    <main className=" w-full min-h-screen bg-white p-8 md:p-10">
       <div className=" mx-auto">
         {/* Page Header */}
-        <header className="mb-8">
-          <h1 className="text-3xl font-extrabold text-[#3752fa] drop-shadow-sm">Add Department</h1>
-          <p className="text-gray-600 mt-1">Manage your departments efficiently with caab</p>
-        </header>
 
         {/* Form Container */}
-        <section className="bg-white rounded-3xl shadow-xl p-8 mb-14">
+        <section className="mb-8" >
           <DepartmentForm
             formData={departmentData}
             onChange={handleOnChange}
@@ -66,7 +61,7 @@ const AddDepartmentPage = () => {
         </section>
 
         {/* Department Table Container */}
-        <section className="bg-white rounded-3xl shadow-xl p-6">
+        <section>
           <DepartmentTable />
         </section>
 
