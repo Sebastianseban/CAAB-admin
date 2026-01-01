@@ -22,14 +22,13 @@ import AddBusinessTypePage from "./pages/AddBusinessTypePage.jsx";
 import { Toaster } from "react-hot-toast";
 import ManagecompanyPage from "./pages/ManagecompanyPage.jsx";
 import CompanyDetailsPage from "./pages/CompanyDetailsPage.jsx";
-import Demo from "./pages/demo.jsx";
-import ReportPage from "./pages/reportPage.jsx";
+
+
 
 
 const router = createBrowserRouter([
 
-  { path: "demo", element: <Demo/> },
-  { path: "report", element: <ReportPage/> },
+ 
   {
     path: "/",
     element: <Navigate to="/login" replace />,
